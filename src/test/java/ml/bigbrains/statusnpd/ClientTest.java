@@ -6,6 +6,7 @@ import ml.bigbrains.statusnpd.model.enums.BuyerType;
 import ml.bigbrains.statusnpd.model.enums.Order;
 import ml.bigbrains.statusnpd.model.enums.ReceiptType;
 import ml.bigbrains.statusnpd.model.enums.SortBy;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -24,6 +25,7 @@ public class ClientTest {
     {
         StatusNDPClient client = new StatusNDPClient();
         TaxPayerResponse info = client.getTaxPayer("wrongTokenValue", new TaxPayerRequest());
+        Assert.assertNotNull(info);
         log.debug("TaxPayner error '{}': '{}'",info.getCode(),info.getMessage());
     }
 
@@ -32,6 +34,7 @@ public class ClientTest {
     {
         StatusNDPClient client = new StatusNDPClient();
         TaxPayerResponse info = client.getTaxPayer(testToken, new TaxPayerRequest());
+        Assert.assertNotNull(info);
         log.debug("TaxPayner info {}",info);
     }
 
@@ -48,6 +51,7 @@ public class ClientTest {
     {
         StatusNDPClient client = new StatusNDPClient();
         TaxesHistoryResponse info = client.getTaxesHistory(testToken, new TaxesHistoryRequest());
+        Assert.assertNotNull(info);
         log.debug("Taxes history info {}",info);
     }
 
@@ -57,6 +61,7 @@ public class ClientTest {
         StatusNDPClient client = new StatusNDPClient();
         IncomesRequest req = new IncomesRequest(LocalDateTime.now().minusDays(5), LocalDateTime.now(), 0, 100, SortBy.total_amount, Order.desc, BuyerType.PERSON, ReceiptType.REGISTERED);
         IncomesResponse info = client.getIncomes(testToken, req);
+        Assert.assertNotNull(info);
         log.debug("incomes info {}",info);
     }
 }
